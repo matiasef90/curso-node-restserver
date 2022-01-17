@@ -1,4 +1,5 @@
 const { response } = require('express');
+const Usuario = require('../models/user');
 
  const usersGet = (req, res = response) => {
     res.json({
@@ -6,12 +7,11 @@ const { response } = require('express');
     });
 };
 const usersPost = (req, res = response) => {
-    const { nombre, apellido, edad } = req.body;
+    const body = req.body;
+    const usuario = new Usuario(body);
+    usuario.save();
     res.json({
-        msg: 'Funcion userPost',
-        nombre,
-        apellido,
-        edad,
+        usuario
     });
 };
 const usersPatch = (req, res = response) => {
