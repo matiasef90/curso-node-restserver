@@ -10,13 +10,6 @@ const bcrypt = require('bcryptjs');
 const usersPost = async (req, res = response) => {
     const { name, email, password, role } = req.body;
     const usuario = new Usuario({name, email, password, role});
-    //Verificamos si el email existe
-    const existeEmail = await Usuario.findOne({email});
-    if (existeEmail) {
-        return res.status(400).json({
-            message: 'El email ya se encuentra registrado',
-        })
-    }
     //Encriptamos la contraseña
     const salt = bcrypt.genSaltSync();
     usuario.password = bcrypt.hashSync(password, salt);
