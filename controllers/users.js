@@ -10,7 +10,7 @@ const bcrypt = require('bcryptjs');
         .limit(Number(limite))
         .skip(Number(desde)),
         Usuario.countDocuments(query)
-    ])
+    ]);
     res.json({
         total,
         usuarios,
@@ -41,9 +41,11 @@ const usersPut = async (req, res = response) => {
         usuario
     });
 };
-const usersDelete = (req, res = response) => {
+const usersDelete = async (req = request, res = response) => {
+    const { id } = req.params;
+    const usuario = await Usuario.findByIdAndUpdate(id, { state: false });
     res.json({
-        msg: 'Funcion usersDelete',
+        usuario
     });
 };
 

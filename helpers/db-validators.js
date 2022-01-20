@@ -13,7 +13,7 @@ const emailRegistrado = async (email) => {
         throw new Error('El email se ya ha sido registrado');
     }
 };
-const existeId = async (id) => {
+const existeUsuarioId = async (id) => {
     const existe = await Usuario.findById(id);
     if (!existe) {
         throw new Error('No existe ningun usuario con ese id');
@@ -23,5 +23,5 @@ const existeId = async (id) => {
 module.exports = {
     rolValido,
     emailRegistrado,
-    existeId
+    existeUsuarioId
 }
